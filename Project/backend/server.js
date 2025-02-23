@@ -6,12 +6,15 @@ const pdfParse = require("pdf-parse");
 const fs = require("fs").promises;
 const path = require("path");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-require("dotenv").config();
-
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+
+if (!GEMINI_API_KEY) {
+  console.error(" ERROR: GEMINI_API_KEY is missing in .env file");
+  process.exit(1); // Stop server if API key is missing
+}
 
 // Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
@@ -38,12 +41,7 @@ const analyzeResume = async (resumeText) => {
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     const prompt = `
-      You are an AI specialized in resume analysis. Analyze the given resume text based on:
-      - **Relevancy of Skills and Education**: Are the listed skills and education relevant to industry trends?
-      - **Projects Quality**: Are the projects innovative, detailed, and impactful?
-      - **Industry Standards**: How well does the resume align with current hiring standards?
-
-      Provide the response in a structured JSON format:
+      You are an AI specialized in resume analysis. Analyze the given resume text and return structured JSON:
       {
         "skills_relevancy": "<Your assessment>",
         "education_relevancy": "<Your assessment>",
@@ -51,23 +49,28 @@ const analyzeResume = async (resumeText) => {
         "industry_standards_alignment": "<Your assessment>",
         "overall_feedback": "<General feedback>"
       }
-
-      Here is the extracted resume text:
+      Resume:
       """${resumeText}"""
     `;
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
-    const analysis = response.text(); // AI-generated analysis
 
-    console.log("AI Resume Analysis:", analysis); // Log analysis for testing
+    // ✅ Extract text correctly from Gemini API
+    const analysis = response.candidates[0].content.parts[0].text;
 
-    return analysis;
+    // ✅ Remove unwanted formatting (triple backticks)
+    const cleanedAnalysis = analysis.replace(/```json|```/gi, "").trim();
+
+    console.log("AI Analysis Response:", cleanedAnalysis); // Debugging
+
+    return JSON.parse(cleanedAnalysis); // Parse clean JSON
   } catch (error) {
-    console.error("Error in AI analysis:", error);
+    console.error("AI Analysis Error:", error);
     return null;
   }
 };
+
 
 // File upload endpoint
 app.post("/upload", upload.single("file"), async (req, res) => {
@@ -76,28 +79,37 @@ app.post("/upload", upload.single("file"), async (req, res) => {
       return res.status(400).json({ error: "No file uploaded" });
     }
 
-    console.log("Uploaded file:", req.file);
+    console.log(" Uploaded file:", req.file);
 
     if (req.file.mimetype === "application/pdf") {
+      if (!(await fs.stat(req.file.path).catch(() => false))) {
+        return res.status(500).json({ error: "File not found after upload" });
+      }
+
       const dataBuffer = await fs.readFile(req.file.path);
       const resumeText = await pdfParse(dataBuffer);
-      
+
       const textFilePath = path.join("./public/", `${req.file.filename}.txt`);
       await fs.writeFile(textFilePath, resumeText.text, "utf8");
 
       // Call AI analysis function
-      await analyzeResume(resumeText.text);
+      const analysis = await analyzeResume(resumeText.text);
+
+      if (!analysis) {
+        return res.status(500).json({ error: "AI analysis failed" });
+      }
 
       return res.json({
-        message: "PDF uploaded, text extracted, and analysis logged",
+        message: " PDF uploaded, text extracted, and analyzed",
         pdfPath: req.file.path,
         textFilePath: textFilePath,
+        analysis: analysis, // Send analysis to frontend
       });
     }
 
-    res.json({ message: "File uploaded successfully", filePath: req.file.path });
+    res.json({ message: " File uploaded successfully", filePath: req.file.path });
   } catch (error) {
-    console.error("Error processing file:", error);
+    console.error(" Error processing file:", error);
     res.status(500).json({ error: "Error processing file" });
   }
 });
