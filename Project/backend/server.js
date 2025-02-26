@@ -38,12 +38,12 @@ const upload = multer({ storage });
 // Function to analyze resume with Gemini AI
 const analyzeResume = async (resumeText) => {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
     const prompt = `
       You are an AI specialized in resume analysis. Analyze the given resume text and return structured JSON:
       {
-        "skills_relevancy": "<Your assessment>",
+        "skills_relevancy": "<Your assessment>", // work here manjrekar
         "education_relevancy": "<Your assessment>",
         "projects_quality": "<Your assessment>",
         "industry_standards_alignment": "<Your assessment>",
@@ -113,6 +113,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
     res.status(500).json({ error: "Error processing file" });
   }
 });
+
 
 // Start server
 app.listen(PORT, () => {
