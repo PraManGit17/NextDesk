@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import ResumeAnalysis from "./components/ResumeAnalysis";
 import Header from "./components/Header";
-
-
+import UploadResume from "./components/UploadResume";
 
 
 
 
 function App() {
   return (
-    <div className="bg-black min-h-screen w-full">
-        <Header />    
-        <ResumeAnalysis />
+    <div className="bg-black w-full">
+        <Header /> 
+        <UploadResume />
+
     </div>
     
   );

@@ -13,12 +13,12 @@ const Header = () => {
 
     {/* Left Section */}
     <div className="flex items-center flex-1 ml-5">
-      <MdMenu size={35} className="px-1 rounded-lg border border-white-600 w-10" />
+      <MdMenu size={35} className="px-1 rounded-lg border border-white-600 w-12" />
       <span className="text-xl font-bold ml-20">Home</span>
     </div>
 
     {/* Center Section - Stays Centered */}
-    <div className="absolute left-1/2 transform -translate-x-1/2 text-3xl font-bold px-5 rounded-2xl border border-white-600">
+    <div className="text-3xl font-bold px-5 rounded-2xl border border-white-600">
       <span>NextDesk</span>
     </div>
 

@@ -46,7 +46,7 @@ const analyzeResume = async (resumeText) => {
       You are an AI specialized in Resume Analysis just like an HR in a Company. 
       You have to analyze the given resume text and return structured JSON UI Visualization:
       {
-        "resume score": "<Overall Percentage score out of 100%, based on industry benchmark>",
+        "resume_score": "<Overall Percentage score out of 100%, based on industry benchmark>",
         "industry ranking": "<A percentile ranking of the candidate in industry>",
         "overall_feedback": "<One-line feedback on resume quality>"
       },
