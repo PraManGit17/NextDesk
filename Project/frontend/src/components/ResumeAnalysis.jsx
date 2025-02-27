@@ -39,7 +39,8 @@ const ResumeAnalysis = () => {
 
 
   return (
-      <div>
+      <div className=" text-white">
+
       <h2>Resume AI Analysis</h2>
       <input type="file" onChange={(e) => setFile(e.target.files[0])} />
       <button type="button" onClick={upload} disabled={loading} style={{ marginLeft: "10px" }}>
