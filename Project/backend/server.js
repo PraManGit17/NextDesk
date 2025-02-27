@@ -13,7 +13,7 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 if (!GEMINI_API_KEY) {
   console.error(" ERROR: GEMINI_API_KEY is missing in .env file");
-  process.exit(1); // Stop server if API key is missing
+  process.exit(1); // Stop server if API key is missingT
 }
 
 // Initialize Gemini AI
@@ -35,38 +35,71 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Function to analyze resume with Gemini AI
+
+// Ai Response
+
 const analyzeResume = async (resumeText) => {
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
     const prompt = `
-      You are an AI specialized in resume analysis. Analyze the given resume text and return structured JSON:
+      You are an AI specialized in Resume Analysis just like an HR in a Company. 
+      You have to analyze the given resume text and return structured JSON UI Visualization:
       {
-        "skills_relevancy": "<Your assessment>", // work here manjrekar
-        "education_relevancy": "<Your assessment>",
-        "projects_quality": "<Your assessment>",
-        "industry_standards_alignment": "<Your assessment>",
-        "overall_feedback": "<General feedback>"
+        "resume score": "<Overall Percentage score out of 100%, based on industry benchmark>",
+        "industry ranking": "<A percentile ranking of the candidate in industry>",
+        "overall_feedback": "<One-line feedback on resume quality>"
+      },
+      "key_insights": {
+          "Skills_Acquired": "<Percentage out of 100>",
+          "Experience": "<Percentage out of 100>",
+          "Education_relevance": "<Percentage out of 100>"
+      },
+      "Resume_Gap_Resume": {
+          "missing_skills": ["Skill1", "Skill2"], 
+          "recommended_courses": ["Course1", "Course2"], 
+          "experience_required": "<Specific experience or project suggestions>"
+      },
+      "Recommendations": {
+        "best_job_roles": [
+          { "role": "Job Role 1", "match_percentage": "<%>" },
+          { "role": "Job Role 2", "match_percentage": "<%>" }
+        ]
       }
       Resume:
       """${resumeText}"""
     `;
 
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
+    const result = await model.generateContent({
+      contents: [{ role: "user", parts: [{ text: prompt }] }],  // ✅ Correct input format
+      generationConfig: {
+        temperature: 0,   
+        top_p: 0.9,       
+        max_output_tokens: 1000 
+      }
+    });
 
-    // ✅ Extract text correctly from Gemini API
-    const analysis = response.candidates[0].content.parts[0].text;
+    // ✅ Extract AI Response Safely
+    const response = result.response?.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!response) throw new Error("Invalid AI response format");
 
-    // ✅ Remove unwanted formatting (triple backticks)
-    const cleanedAnalysis = analysis.replace(/```json|```/gi, "").trim();
+    // ✅ Remove unwanted formatting
+    const cleanedAnalysis = response.replace(/```json|```/gi, "").trim();
 
     console.log("AI Analysis Response:", cleanedAnalysis); // Debugging
 
-    return JSON.parse(cleanedAnalysis); // Parse clean JSON
+    return JSON.parse(cleanedAnalysis);
   } catch (error) {
+
+    
     console.error("AI Analysis Error:", error);
+    
+    // Check if error is 503 (Service Unavailable) and retry
+    if (error.status === 503 && retries > 0) {
+        console.log(`Retrying in ${delay / 1000} seconds... Attempts left: ${retries}`);
+        await new Promise(resolve => setTimeout(resolve, delay)); // Wait before retrying
+        return analyzeResume(resumeText, retries - 1, delay * 2); // Retry with exponential backoff
+      }
     return null;
   }
 };
