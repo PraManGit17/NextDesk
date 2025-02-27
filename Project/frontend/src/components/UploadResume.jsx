@@ -39,7 +39,7 @@ const UploadResume = () => {
   };
 
   return (
-  <section className='flex mt-12 gap-100'>
+  <section className='flex mt-12 gap-60'>
     <div className="text-white ml-20 flex flex-col items-start w-120">
       <div className="w-120 h-150 flex flex-col items-center p-5 rounded-2xl border border-white">
         <h2 className="text-xl font-bold mb-6">Resume AI Analysis</h2>
