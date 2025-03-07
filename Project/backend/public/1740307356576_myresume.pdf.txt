@@ -1,0 +1,40 @@
+
+
+Pratham Manjrekar
+pra172005@gmail.com
+Mumbai, India
+LinkedIn
+8369532306
+Github
+Education :
+2023/08 – 2027/05Pursuing Bachelors of Engineering in Computer Engineering
+- from Thadomal Shahani Engineering College, Bandra-West, Mumbai
+2021/09 – 2023/05Completed HSC
+-from V. G. Vaze College of Arts, Commerce and Science, Mithaghar, Mulund-East, Mumbai
+Scored 89.60%
+2011/06 – 2021/08Completed SSC
+- from Sou. Laxmibai. Eng. Med. School, Mulund-East, Mumbai
+Scored 96.40%
+Projects :
+Project 1:-  Recipes Fetcher
+A React.js app using Hugging Face AI to generate recipes based on user-input ingredients.
+Project 2:- StatsCric
+A cricket analytics platform for IPL data (2008–2021) with player and match insights, built using React.js and 
+Django.
+Experiences
+- Junior Committee Member - Marketing Department , TSEC Codestorm
+Technical Skills
+Languages :
+C and Java.
+Web Development :
+Frontend - Html, CSS Tailwind, Javascript.
+Framework: ReactJs.
+Backend - NodeJs, ExpressJs
+Database: MongoDB
+Technologies Familiar With
+GitHub :
+For Version Control.
+Figma, Canva :
+For UI/ Ux and Graphic Designing.
+Achievements
+- Brain2Win Competition (2024): Secured 3rd place in a tech competition organized by TSEC CodeCell.
