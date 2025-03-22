@@ -1,0 +1,37 @@
+/* Common Glassmorphism Effect */
+#file, #filer {
+  transition: all 0.3s ease-in-out;
+  border-radius: 15px;
+  backdrop-filter: blur(15px);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.2)); /* Black to White Gradient */
+  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Uploaded Resume Box */
+#file {
+  border: 2px solid rgba(255, 255, 255, 0.4); /* Soft border */
+  padding: 20px;
+}
+
+/* Resume Box - Hover Effect */
+#file:hover {
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0px 15px 25px rgba(255, 255, 255, 0.8); /* Stronger glow */
+  transform: translateY(-10px); /* Lift effect */
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0.4)); /* Darker gradient on hover */
+}
+
+/* Default Text Box */
+#filer {
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 30px;
+  text-align: center;
+}
+
+/* Default Text Box - Hover Effect */
+#filer:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 15px 25px rgba(255, 255, 255, 0.6); /* More glow */
+  transform: translateY(-10px); /* Lift effect */
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0.5)); /* Slightly darker hover */
+}

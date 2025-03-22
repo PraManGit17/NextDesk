@@ -16,11 +16,13 @@ Scored 89.60%
 - from Sou. Laxmibai. Eng. Med. School, Mulund-East, Mumbai
 Scored 96.40%
 Projects :
-Project 1:-  Recipes Fetcher
-A React.js app using Hugging Face AI to generate recipes based on user-input ingredients.
-Project 2:- StatsCric
-A cricket analytics platform for IPL data (2008–2021) with player and match insights, built using React.js and 
-Django.
+Project 1:- FoodSpace
+A Webapp build on ReactJs Framework used for searching recipes, creating new recipes with help of an Ai model 
+and acts a community platform to promote new recipes.
+Project 2:- NextDesk
+NextDesk is an AI-powered web app for resume scoring, verification, and skill-gap analysis based on industry 
+benchmarks. It enhances candidate profiles for better job opportunities and facilitates intelligent resume-based job 
+matching to connect them with the most relevant roles.
 Experiences
 - Junior Committee Member - Marketing Department , TSEC Codestorm
 Technical Skills
@@ -38,3 +40,6 @@ Figma, Canva :
 For UI/ Ux and Graphic Designing.
 Achievements
 - Brain2Win Competition (2024): Secured 3rd place in a tech competition organized by TSEC CodeCell.
+
+Past Hackathons
+- Top 30 in Ves-Hack-it 2025 at ivekanand Education Society's Institute of Technology (VESIT).

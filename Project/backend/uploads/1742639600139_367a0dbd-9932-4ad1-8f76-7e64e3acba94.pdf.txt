@@ -1,0 +1,45 @@
+
+
+Pratham Manjrekar
+pra172005@gmail.com
+Mumbai, India
+LinkedIn
+8369532306
+Github
+Education :
+2023/08 – 2027/05Pursuing Bachelors of Engineering in Computer Engineering
+- from Thadomal Shahani Engineering College, Bandra-West, Mumbai
+2021/09 – 2023/05Completed HSC
+-from V. G. Vaze College of Arts, Commerce and Science, Mithaghar, Mulund-East, Mumbai
+Scored 89.60%
+2011/06 – 2021/08Completed SSC
+- from Sou. Laxmibai. Eng. Med. School, Mulund-East, Mumbai
+Scored 96.40%
+Projects :
+Project 1:- FoodSpace
+A Webapp build on ReactJs Framework used for searching recipes, creating new recipes with help of an Ai model 
+and acts a community platform to promote new recipes.
+Project 2:- NextDesk
+NextDesk is an AI-powered web app for resume scoring, verification, and skill-gap analysis based on industry 
+benchmarks. It enhances candidate profiles for better job opportunities and facilitates intelligent resume-based job 
+matching to connect them with the most relevant roles.
+Experiences
+- Junior Committee Member - Marketing Department , TSEC Codestorm
+Technical Skills
+Languages :
+C and Java.
+Web Development :
+Frontend - Html, CSS Tailwind, Javascript.
+Framework: ReactJs.
+Backend - NodeJs, ExpressJs
+Database: MongoDB
+Technologies Familiar With
+GitHub :
+For Version Control.
+Figma, Canva :
+For UI/ Ux and Graphic Designing.
+Achievements
+- Brain2Win Competition (2024): Secured 3rd place in a tech competition organized by TSEC CodeCell.
+
+Past Hackathons
+- Top 30 in Ves-Hack-it 2025 at ivekanand Education Society's Institute of Technology (VESIT).
